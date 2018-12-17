@@ -370,4 +370,13 @@ public class Utilities {
 
         return traversal.stream().mapToInt(i->i).toArray();
     }
+
+    public static <T> Set<T> constructSet(T... items) {
+        Set<T> set = new HashSet<>();
+        for(var item: items) {
+            set.add(item);
+        }
+
+        return set;
+    }
 }
