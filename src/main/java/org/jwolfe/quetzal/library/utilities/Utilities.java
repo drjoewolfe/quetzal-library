@@ -344,4 +344,30 @@ public class Utilities {
 
         return arr;
     }
+
+    public static int[] getLeftToRightTraversal(BinaryTreeNode head) {
+        BinaryTreeNode current = head;
+        List<Integer> traversal = new LinkedList<>();
+        while(current != null) {
+            traversal.add(current.getData());
+            current = current.getRight();
+        }
+
+        return traversal.stream().mapToInt(i->i).toArray();
+    }
+
+    public static int[] getRightToLeftTraversal(BinaryTreeNode head) {
+        BinaryTreeNode current = head;
+        while (current.getRight() != null) {
+            current = current.getRight();
+        }
+
+        List<Integer> traversal = new LinkedList<>();
+        while(current != null) {
+            traversal.add(current.getData());
+            current = current.getLeft();
+        }
+
+        return traversal.stream().mapToInt(i->i).toArray();
+    }
 }
