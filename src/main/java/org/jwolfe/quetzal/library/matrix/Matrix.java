@@ -63,4 +63,54 @@ public class Matrix {
 
         return trace;
     }
+
+    public static int[][] getTranspose(int[][] matrix) {
+        if(matrix == null
+            || matrix.length == 0) {
+            return null;
+        }
+
+        int length = matrix.length;
+        int[][] transpose = new int[length][length];
+        for (int i = 0; i < length; i++) {
+            if(length != matrix[i].length) {
+                return null;
+            }
+
+            for (int j = 0; j < length; j++) {
+                transpose[i][j] = matrix[j][i];
+            }
+        }
+
+        return transpose;
+    }
+
+    public static boolean isIdentity(int[][] matrix) {
+        if (matrix == null
+                || matrix.length == 0) {
+            return false;
+        }
+
+        int length = matrix.length;
+
+        for (int i = 0; i < length; i++) {
+            if (length != matrix[i].length) {
+                return false;
+            }
+
+            for (int j = 0; j < length; j++) {
+                if (i == j) {
+                    if (matrix[i][j] != 1) {
+                        return false;
+                    }
+                } else {
+                    if (matrix[i][j] != 0) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
 }
