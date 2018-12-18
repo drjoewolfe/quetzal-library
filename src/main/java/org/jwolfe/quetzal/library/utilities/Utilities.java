@@ -388,4 +388,13 @@ public class Utilities {
 
         return result;
     }
+
+    public static <T> Queue<T> constructQueue(T... items) {
+        Queue<T> queue = new LinkedList<>();
+        for (var item : items) {
+            queue.offer(item);
+        }
+
+        return queue;
+    }
 }
