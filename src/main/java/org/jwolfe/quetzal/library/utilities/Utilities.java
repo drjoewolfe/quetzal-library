@@ -268,6 +268,10 @@ public class Utilities {
         return Math.max(Math.max(x, y), z);
     }
 
+    public static int max(int a, int b, int c, int d) {
+        return Math.max(max(a, b, c), d);
+    }
+
     public static int min(int x, int y, int z) {
         return Math.min(Math.min(x, y), z);
     }
