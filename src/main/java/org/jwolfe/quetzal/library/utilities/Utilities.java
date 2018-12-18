@@ -379,4 +379,13 @@ public class Utilities {
 
         return set;
     }
+
+    public static int[] extractArray(int[] arr, int start, int i) {
+        int[] result = new int[i - start + 1];
+        for (int j = start; j <= i; j++) {
+            result[j - start] = arr[j];
+        }
+
+        return result;
+    }
 }
