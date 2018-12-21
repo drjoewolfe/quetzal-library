@@ -401,4 +401,26 @@ public class Utilities {
 
         return queue;
     }
+
+	public static int max(int[] arr, int start, int end) {
+		int max = Integer.MIN_VALUE;
+		for (int i = start; i <= end; i++) {
+			max = Math.max(max,  arr[i]);
+		}
+		
+		return max;
+	}
+	
+	public static int maxIndex(int[] arr, int start, int end) {
+		int max = Integer.MIN_VALUE;
+		int maxIndex = -1;
+		for (int i = start; i <= end; i++) {
+			if(max < arr[i]) { 
+				max = arr[i];
+				maxIndex = i;
+			}
+		}
+		
+		return maxIndex;
+	}
 }
