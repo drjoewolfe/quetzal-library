@@ -489,4 +489,22 @@ public class Utilities {
 		
 		return list;
 	}
+
+	public static int getMaxValue(int[][] arr) {
+		int max = Integer.MIN_VALUE;
+		for (int[] subArray : arr) {
+			max = Math.max(max, getMaxValue(subArray));
+		}		
+		
+		return max;
+	}
+	
+	public static int getMaxValue(int[] arr) {
+		int max = Integer.MIN_VALUE;
+		for (int value : arr) {
+			max = Math.max(max, value);
+		}		
+		
+		return max;
+	}
 }
