@@ -189,11 +189,17 @@ public class Utilities {
 		if (leftChildIndex < treeArray.length) {
 			var leftChild = constructBinaryTree(treeArray, leftChildIndex);
 			node.setLeft(leftChild);
+			if (leftChild != null) {
+				leftChild.setParent(node);
+			}
 		}
 
 		if (rightChildIndex < treeArray.length) {
 			var rightChild = constructBinaryTree(treeArray, rightChildIndex);
 			node.setRight(rightChild);
+			if (rightChild != null) {
+				rightChild.setParent(node);
+			}
 		}
 
 		return node;
@@ -216,11 +222,17 @@ public class Utilities {
 		if (leftChildIndex < treeArray.length) {
 			var leftChild = constructBinaryTree(treeArray, leftChildIndex);
 			node.setLeft(leftChild);
+			if (leftChild != null) {
+				leftChild.setParent(node);
+			}
 		}
 
 		if (rightChildIndex < treeArray.length) {
 			var rightChild = constructBinaryTree(treeArray, rightChildIndex);
 			node.setRight(rightChild);
+			if (rightChild != null) {
+				rightChild.setParent(node);
+			}
 		}
 
 		return node;

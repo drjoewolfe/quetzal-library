@@ -28,6 +28,10 @@ public class BinaryTreeNode {
     public BinaryTreeNode getParent() {
         return parent;
     }
+    
+    public void setParent(BinaryTreeNode parent) {
+        this.parent = parent;
+    }
 
     protected int data;
     protected BinaryTreeNode left;

@@ -28,6 +28,10 @@ public class BTNode<T> {
     public BTNode<T> getParent() {
         return parent;
     }
+    
+    public void setParent(BTNode<T> parent) {
+        this.parent = parent;
+    }
 
     protected T data;
     protected BTNode<T> left;
