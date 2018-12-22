@@ -292,6 +292,12 @@ public class Utilities {
 		items[j] = temp;
 	}
 
+	public static <T> void swap(List<T> list, int i, int j) {
+		T temp = list.get(i);
+		list.set(i, list.get(j));
+		list.set(j, temp);
+	}
+
 	public static String swap(String str, int i, int j) {
 		char[] ch = str.toCharArray();
 		char temp = ch[i];
@@ -301,9 +307,17 @@ public class Utilities {
 		return new String(ch);
 	}
 
-	public static void printList(List<Integer> list) {
-		for (int i : list) {
+	public static <T> void printList(List<T> list) {
+		for (T i : list) {
 			System.out.print(i + " ");
+		}
+
+		System.out.println();
+	}
+	
+	public static <T> void printListByLines(List<T> list) {
+		for (T i : list) {
+			System.out.println(i + " ");
 		}
 
 		System.out.println();
@@ -465,5 +479,14 @@ public class Utilities {
 		}
 
 		return node;
+	}
+
+	public static <T> ArrayList<T> createArrayList(T... args) {
+		ArrayList<T> list = new ArrayList<>();
+		for (T item : args) {
+			list.add(item);
+		}
+		
+		return list;
 	}
 }
