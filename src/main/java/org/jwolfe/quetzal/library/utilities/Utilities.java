@@ -322,6 +322,23 @@ public class Utilities {
 
 		System.out.println();
 	}
+	
+	public static <T> void printSet(Set<T> list) {
+		for (T i : list) {
+			System.out.print(i + " ");
+		}
+
+		System.out.println();
+	}
+	
+	public static <T> void printSetByLines(Set<T> list) {
+		for (T i : list) {
+			System.out.println(i + " ");
+		}
+
+		System.out.println();
+	}
+
 
 	public static Stack<Integer> createStack(int... args) {
 		Stack<Integer> stack = new Stack<>();
