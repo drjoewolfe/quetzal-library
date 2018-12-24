@@ -1,7 +1,9 @@
 package org.jwolfe.quetzal.library.utilities;
 
 import org.jwolfe.quetzal.library.graph.AdjacencyGraph;
+import org.jwolfe.quetzal.library.list.DoublyLinkedListNode;
 import org.jwolfe.quetzal.library.list.LinkedListNode;
+import org.jwolfe.quetzal.library.list.AuxiliaryLinkedListNode;
 import org.jwolfe.quetzal.library.general.Pair;
 import org.jwolfe.quetzal.library.list.RightDownLinkedListNode;
 import org.jwolfe.quetzal.library.tree.BTNode;
@@ -30,6 +32,38 @@ public class Utilities {
 
 		for (int value : arr) {
 			tail.setNext(new LinkedListNode(value));
+			tail = tail.getNext();
+		}
+
+		return dummy.getNext();
+	}
+	
+	public static DoublyLinkedListNode createDoublyLinkedList(int... args) {
+		return createDoublyLinkedListFromArray(args);
+	}
+
+	public static DoublyLinkedListNode createDoublyLinkedListFromArray(int[] arr) {
+		DoublyLinkedListNode dummy = new DoublyLinkedListNode(0);
+		DoublyLinkedListNode tail = dummy;
+
+		for (int value : arr) {
+			tail.setNext(new DoublyLinkedListNode(value));
+			tail = tail.getNext();
+		}
+
+		return dummy.getNext();
+	}
+	
+	public static AuxiliaryLinkedListNode createAuxiliaryLinkedList(int... args) {
+		return createAuxiliaryLinkedListFromArray(args);
+	}
+
+	public static AuxiliaryLinkedListNode createAuxiliaryLinkedListFromArray(int[] arr) {
+		AuxiliaryLinkedListNode dummy = new AuxiliaryLinkedListNode(0);
+		AuxiliaryLinkedListNode tail = dummy;
+
+		for (int value : arr) {
+			tail.setNext(new AuxiliaryLinkedListNode(value));
 			tail = tail.getNext();
 		}
 
