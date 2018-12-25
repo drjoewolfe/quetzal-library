@@ -1,6 +1,7 @@
 package org.jwolfe.quetzal.library.graph;
 
 import org.junit.jupiter.api.Test;
+import org.jwolfe.quetzal.library.utilities.Utilities;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -77,5 +78,29 @@ class EdgeGraphTest {
         graph.edges[4].weight = 4;
 
         graph.kruskalMST();
+    }
+    
+    @Test
+    void bellmanFord() {
+        int v, e;
+        EdgeGraph graph;
+        int[] shortestPaths;
+        int[] expectedShortestPath;       
+        
+        v = 5; 
+        e = 8; 
+        graph = new EdgeGraph(v, e);
+        graph.addEdge(0,  1, -1);
+        graph.addEdge(0,  2, 4);
+        graph.addEdge(1,  2, 3);
+        graph.addEdge(1,  3, 2);
+        graph.addEdge(1, 4, 2);
+        graph.addEdge(3, 2, 5);
+        graph.addEdge(3, 1, 1);
+        graph.addEdge(4, 3, -3);
+
+        expectedShortestPath = Utilities.constructArray(0, -1, 2, -2, 1);
+        shortestPaths = graph.bellmanFord(0);
+        assertArrayEquals(expectedShortestPath, shortestPaths);
     }
 }
