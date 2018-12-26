@@ -367,12 +367,19 @@ public class Utilities {
 	
 	public static <T> void printSetByLines(Set<T> list) {
 		for (T i : list) {
-			System.out.println(i + " ");
+			System.out.print(i + " ");
 		}
 
 		System.out.println();
 	}
 
+	public static <T> void printSetListByLines(List<Set<T>> list) {
+		for(Set<T> set : list) {
+			printSetByLines(set);
+		}
+
+		System.out.println();
+	}
 
 	public static Stack<Integer> createStack(int... args) {
 		Stack<Integer> stack = new Stack<>();
