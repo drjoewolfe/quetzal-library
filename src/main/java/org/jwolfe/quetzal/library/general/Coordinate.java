@@ -26,4 +26,22 @@ public class Coordinate {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public void set(Coordinate newCoordinate) {
+		if(newCoordinate == null) {
+			return;
+		}
+		
+		this.x = newCoordinate.x;
+		this.y = newCoordinate.y;
+	}
+	
+	public void increment(Coordinate deltaCoordinate) {
+		if(deltaCoordinate == null) {
+			return;
+		}
+		
+		this.x += deltaCoordinate.x;
+		this.y += deltaCoordinate.y;
+	}
 }
