@@ -571,4 +571,28 @@ public class Utilities {
 			Arrays.fill(row, x);
 		}
     }
+
+    public static <T> List<T> constructList(T... args) {
+		List<T> list = new ArrayList<>();
+		for(T item : args) {
+			list.add(item);
+		}
+
+		return list;
+    }
+
+	public static <T> Set<T> getSetDifference(Set<T> set1, Set<T> set2) {
+		if(set1 == null || set2 == null) {
+			return  null;
+		}
+
+		Set<T> difference = new HashSet<>();
+		for(var item : set1) {
+			if(!set2.contains(item)) {
+				difference.add(item);
+			}
+		}
+
+		return difference;
+	}
 }
