@@ -565,4 +565,10 @@ public class Utilities {
 		
 		return max;
 	}
+
+    public static void fillArray(char[][] arr, char x) {
+		for(var row : arr) {
+			Arrays.fill(row, x);
+		}
+    }
 }
