@@ -595,4 +595,19 @@ public class Utilities {
 
 		return difference;
 	}
+
+	public static Set<Integer> getSetDifference(int[] set1, Set<Integer> set2) {
+		if(set1 == null || set2 == null) {
+			return  null;
+		}
+
+		Set<Integer> difference = new HashSet<>();
+		for(var item : set1) {
+			if(!set2.contains(item)) {
+				difference.add(item);
+			}
+		}
+
+		return difference;
+	}
 }
