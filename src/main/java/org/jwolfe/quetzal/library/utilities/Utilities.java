@@ -623,4 +623,10 @@ public class Utilities {
 
 		return difference;
 	}
+
+	public static String getTextFromResourceFile(String fileName) {
+		ClassLoader loader = ClassLoader.getSystemClassLoader();
+		Scanner scanner = new Scanner(loader.getResourceAsStream(fileName), "UTF-8");
+		return scanner.useDelimiter("\\A").next();
+	}
 }
