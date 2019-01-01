@@ -174,6 +174,19 @@ public class Utilities {
 		}
 	}
 
+	public static void printArray(boolean[] arr) {
+		for(boolean value : arr) {
+			System.out.print((value ? "T" : "F") + "\t");
+		}
+		System.out.println();
+	}
+
+	public static void printArray(boolean[][] arr) {
+		for (boolean[] subArray : arr) {
+			printArray(subArray);
+		}
+	}
+
 	public static void printPairList(List<Pair<Integer, Integer>> pairs) {
 		int counter = 0;
 		for (var pair : pairs) {
