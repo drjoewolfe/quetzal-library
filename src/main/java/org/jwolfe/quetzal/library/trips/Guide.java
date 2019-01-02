@@ -1,5 +1,7 @@
 package org.jwolfe.quetzal.library.trips;
 
+import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -41,15 +43,27 @@ public class Guide {
     }
 
     public static <T> void log(Stream<T> stream, int count, String separator) {
-        var elements = stream
-                .limit(count)
-                .collect(Collectors.toList());
+        List<T> elementStream = null;
+
+        if(count == -1) {
+            elementStream = stream.collect(Collectors.toList());
+        }
+        else {
+            elementStream = stream
+                    .limit(count)
+                    .collect(Collectors.toList());
+        }
+
         System.out.print("\t");
-        for(var item : elements) {
+        for(var item : elementStream) {
             System.out.print(item + separator + " ");
         }
 
         System.out.println();
+    }
+
+    public static <T> void log(String title, Stream<T> stream, String separator) {
+        log(title, stream, -1, separator);
     }
 
     public static <T> void log(String title, Stream<T> stream, int count, String separator) {
