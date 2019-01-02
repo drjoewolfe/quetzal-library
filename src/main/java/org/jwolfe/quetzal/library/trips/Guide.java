@@ -35,21 +35,21 @@ public class Guide {
         System.out.println();
     }
 
+    public static <T> void log(String title, Stream<T> stream) {
+        System.out.print("\t- " + title);
+        log(stream);
+    }
+
     public static <T> void log(Stream<T> stream, int count, String separator) {
         var elements = stream
-                        .limit(count)
-                        .collect(Collectors.toList());
+                .limit(count)
+                .collect(Collectors.toList());
         System.out.print("\t");
         for(var item : elements) {
             System.out.print(item + separator + " ");
         }
 
         System.out.println();
-    }
-
-    public static <T> void log(String title, Stream<T> stream) {
-        System.out.print("\t- " + title);
-        log(stream);
     }
 
     public static <T> void log(String title, Stream<T> stream, int count, String separator) {
