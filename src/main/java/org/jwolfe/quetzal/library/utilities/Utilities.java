@@ -584,6 +584,12 @@ public class Utilities {
 			Arrays.fill(row, x);
 		}
     }
+    
+	public static void fillArray(boolean[][] arr, boolean x) {
+		for(var row : arr) {
+			Arrays.fill(row, x);
+		}
+	}
 
     public static <T> List<T> constructList(T... args) {
 		List<T> list = new ArrayList<>();

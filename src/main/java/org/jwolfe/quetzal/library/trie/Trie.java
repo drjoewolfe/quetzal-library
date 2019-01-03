@@ -5,7 +5,11 @@ import java.util.LinkedList;
 public class Trie {
     TrieNode root;
 
-    public Trie() {
+    public TrieNode getRoot() {
+		return root;
+	}
+
+	public Trie() {
         root = new TrieNode();
     }
 
