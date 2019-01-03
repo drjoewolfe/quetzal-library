@@ -579,6 +579,12 @@ public class Utilities {
 		return max;
 	}
 
+	public static void fillArray(int[][] arr, int x) {
+		for(var row : arr) {
+			Arrays.fill(row, x);
+		}
+	}
+
     public static void fillArray(char[][] arr, char x) {
 		for(var row : arr) {
 			Arrays.fill(row, x);
