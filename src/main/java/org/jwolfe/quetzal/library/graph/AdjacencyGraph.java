@@ -90,7 +90,7 @@ public class AdjacencyGraph {
         boolean[] visited = new boolean[vertexCount];
         Arrays.fill(visited, false);
 
-        for(int i = 0; i < vertexCount; i++) {
+        for (int i = 0; i < vertexCount; i++) {
             iterativeDFS(i, visited);
         }
 
@@ -101,15 +101,15 @@ public class AdjacencyGraph {
         Stack<Integer> stack = new Stack<>();
         stack.push(startVertex);
 
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             int vertex = stack.pop();
-            if(!visited[vertex]) {
+            if (!visited[vertex]) {
                 visited[vertex] = true;
                 System.out.print(vertex + " ");
             }
 
             for (int child : adjacencyList[vertex]) {
-                if(!visited[child]) {
+                if (!visited[child]) {
                     stack.push(child);
                 }
             }
@@ -195,9 +195,9 @@ public class AdjacencyGraph {
         Arrays.fill(visited, false);
         var transposeGraph = getTranspose();
 
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             int u = stack.pop();
-            if(!visited[u]) {
+            if (!visited[u]) {
                 transposeGraph.DFSHelper(u, visited);
                 System.out.println();
             }
@@ -206,9 +206,9 @@ public class AdjacencyGraph {
 
     private AdjacencyGraph getTranspose() {
         AdjacencyGraph transposeGraph = new AdjacencyGraph(this.vertexCount);
-        for(int u = 0; u < vertexCount; u++) {
+        for (int u = 0; u < vertexCount; u++) {
             var iterator = adjacencyList[u].iterator();
-            while(iterator.hasNext()) {
+            while (iterator.hasNext()) {
                 transposeGraph.adjacencyList[iterator.next()].add(u);
             }
         }
@@ -218,9 +218,9 @@ public class AdjacencyGraph {
 
     private void sccFillOrderWithDFS(int vertex, boolean[] visited, Stack<Integer> stack) {
         visited[vertex] = true;
-        for(int i = 0; i< adjacencyList[vertex].size(); i++) {
+        for (int i = 0; i < adjacencyList[vertex].size(); i++) {
             int v = adjacencyList[vertex].get(i);
-            if(!visited[v]) {
+            if (!visited[v]) {
                 sccFillOrderWithDFS(v, visited, stack);
             }
         }
@@ -240,7 +240,7 @@ public class AdjacencyGraph {
         }
 
         for (int i = 0; i < visited.length; i++) {
-            if(!visited[i]) {
+            if (!visited[i]) {
                 return false;
             }
         }
@@ -256,8 +256,8 @@ public class AdjacencyGraph {
         boolean[] visited = new boolean[vertexCount];
         Arrays.fill(visited, false);
 
-        for(int i = 0; i < vertexCount; i++) {
-            if(!visited[i]) {
+        for (int i = 0; i < vertexCount; i++) {
+            if (!visited[i]) {
                 timeRunner = updateTimers(i, visited, timeRunner);
             }
         }
@@ -269,8 +269,8 @@ public class AdjacencyGraph {
         timeRunner++;
         inTimes[vertex] = timeRunner;
 
-        for(var v : adjacencyList[vertex]) {
-            if(!visited[v]) {
+        for (var v : adjacencyList[vertex]) {
+            if (!visited[v]) {
                 timeRunner = updateTimers(v, visited, timeRunner);
             }
             timeRunner++;
@@ -282,7 +282,7 @@ public class AdjacencyGraph {
     }
 
     public boolean isInSamePath(int u, int v) {
-        if(inTimes == null) {
+        if (inTimes == null) {
             buildTimings();
         }
 
@@ -296,7 +296,7 @@ public class AdjacencyGraph {
 
         int candidateVertex = 0;
         for (int i = 0; i < vertexCount; i++) {
-            if(!visited[i]) {
+            if (!visited[i]) {
                 DFSHelper(i, visited);
                 candidateVertex = i;
             }
@@ -305,7 +305,7 @@ public class AdjacencyGraph {
         Arrays.fill(visited, false);
         DFSHelper(candidateVertex, visited);
         for (int i = 0; i < vertexCount; i++) {
-            if(!visited[i]) {
+            if (!visited[i]) {
                 return -1;
             }
         }
@@ -327,7 +327,7 @@ public class AdjacencyGraph {
         AtomicInteger time = new AtomicInteger(0);
 
         for (int i = 0; i < vertexCount; i++) {
-            if(!visited[i]) {
+            if (!visited[i]) {
                 getBridges(i, visited, discoveryTime, low, parent, time, bridges);
             }
         }
@@ -340,19 +340,18 @@ public class AdjacencyGraph {
         discoveryTime[vertex] = time.getAndIncrement();
         low[vertex] = discoveryTime[vertex];
 
-        for(int child: adjacencyList[vertex]) {
-            if(!visited[child]) {
+        for (int child : adjacencyList[vertex]) {
+            if (!visited[child]) {
                 parent[child] = vertex;
                 getBridges(child, visited, discoveryTime, low, parent, time, bridges);
 
                 low[vertex] = Math.min(low[vertex], low[child]);
 
-                if(low[child] > discoveryTime[vertex]) {
+                if (low[child] > discoveryTime[vertex]) {
                     bridges.add(new Pair<>(vertex, child));
                 }
-            }
-            else {
-                if(child != parent[vertex]) {
+            } else {
+                if (child != parent[vertex]) {
                     low[vertex] = Math.min(low[vertex], discoveryTime[child]);
                 }
             }
@@ -370,14 +369,14 @@ public class AdjacencyGraph {
 
             var adjacentVertices = adjacencyList[u];
             for (var v : adjacentVertices) {
-                if(assignments[v] != -1) {
+                if (assignments[v] != -1) {
                     colorAvailable[assignments[v]] = false;
                 }
             }
 
             int color = 0;
             for (; color < vertexCount; color++) {
-                if(colorAvailable[color]) {
+                if (colorAvailable[color]) {
                     break;
                 }
             }
@@ -401,5 +400,42 @@ public class AdjacencyGraph {
         int[][] adjacencyArray3 = Matrix.multiply(adjacencyArray, adjacencyArray2);
 
         return Matrix.getTrace(adjacencyArray3) / 6;
+    }
+
+    public List<List<Integer>> getAllPathsFromSourceToDestination(int source, int destination) {
+        if (source < 0 || source >= vertexCount
+                || destination < 0 || destination >= vertexCount) {
+            return null;
+        }
+
+        List<List<Integer>> allPaths = new ArrayList<>();
+        List<Integer> currentPath = new ArrayList<>();
+        generateAllPathsFromSourceToDestination(source, destination, source, currentPath, allPaths);
+
+        if (allPaths.size() == 0) {
+            return null;
+        }
+
+        return allPaths;
+    }
+
+    private void generateAllPathsFromSourceToDestination(int source, int destination,
+                                                         int current, List<Integer> currentPath, List<List<Integer>> allPaths) {
+        currentPath.add(current);
+        int index = currentPath.size() - 1;
+
+        if (current == destination) {
+            allPaths.add(new ArrayList<>(currentPath));
+            currentPath.remove(index);
+            return;
+        }
+
+        for (var next : adjacencyList[current]) {
+            if (!currentPath.contains(next)) {
+                generateAllPathsFromSourceToDestination(source, destination, next, currentPath, allPaths);
+            }
+        }
+
+        currentPath.remove(index);
     }
 }

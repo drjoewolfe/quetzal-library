@@ -177,7 +177,7 @@ class AdjacencyGraphTest {
     @Test
     void isInSamePath() {
         AdjacencyGraph graph = new AdjacencyGraph(10);
-        graph.addEdge(1,2);
+        graph.addEdge(1, 2);
         graph.addEdge(1, 3);
         graph.addEdge(3, 6);
         graph.addEdge(2, 4);
@@ -288,12 +288,35 @@ class AdjacencyGraphTest {
         AdjacencyGraph graph;
         int numTriangles;
 
-        graph = Utilities.constructUndirectedGraphFromAdjacencyArray(new int[][] {
+        graph = Utilities.constructUndirectedGraphFromAdjacencyArray(new int[][]{
                 {0, 1, 1, 0},
                 {1, 0, 1, 1},
                 {1, 1, 0, 1},
                 {0, 1, 1, 0}});
         numTriangles = graph.getNumberOfTriangles();
         assertEquals(2, numTriangles);
+    }
+
+    @Test
+    void getAllPathsFromSourceToDestination() {
+        AdjacencyGraph graph;
+        List<List<Integer>> allPaths;
+        List<List<Integer>> expectedPaths;
+
+        graph = new AdjacencyGraph(4);
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 2);
+        graph.addEdge(0, 3);
+        graph.addEdge(2, 0);
+        graph.addEdge(2, 1);
+        graph.addEdge(1, 3);
+        expectedPaths = Utilities.constructList(Utilities.constructList(2, 0, 1, 3),
+                Utilities.constructList(2, 0, 3),
+                Utilities.constructList(2, 1, 3));
+        allPaths = graph.getAllPathsFromSourceToDestination(2, 3);
+        assertEquals(expectedPaths.size(), allPaths.size());
+        for (var path : expectedPaths) {
+            assertTrue(allPaths.contains(path));
+        }
     }
 }
