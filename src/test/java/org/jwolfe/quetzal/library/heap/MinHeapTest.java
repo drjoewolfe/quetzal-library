@@ -1,23 +1,23 @@
 package org.jwolfe.quetzal.library.heap;
 
 import org.junit.jupiter.api.Test;
-import org.jwolfe.quetzal.library.heap.MinHeap;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class MinHeapTest {
-
     @Test
     void insert() {
-        MinHeap heap = new MinHeap(11);
+        MinHeap<Integer> heap = new MinHeap<>(11);
 
-        heap.insert(new int[] {3, 2, 1, 15, 5, 4, 45});
+        heap.insert(new Integer[]{3, 2, 1, 15, 5, 4, 45});
         heap.printHeap();
     }
 
     @Test
     void delete() {
-        MinHeap heap = new MinHeap(11);
+        MinHeap<Integer> heap = new MinHeap<>(11);
 
-        heap.insert(new int[] {3, 2, 1, 15, 5, 4, 45});
+        heap.insert(new Integer[]{3, 2, 1, 15, 5, 4, 45});
         heap.printHeap();
 
         heap.delete(1);
@@ -32,13 +32,13 @@ class MinHeapTest {
 
     @Test
     void extractMin() {
-        MinHeap heap = new MinHeap(11);
+        MinHeap<Integer> heap = new MinHeap<>(11);
 
-        heap.insert(new int[] {3, 2, 1, 15, 5, 4, 45});
+        heap.insert(new Integer[]{3, 2, 1, 15, 5, 4, 45});
         heap.printHeap();
 
-        int min = heap.extractMin();
-        while(min != Integer.MAX_VALUE) {
+        Integer min = heap.extractMin();
+        while (min != null) {
             System.out.print(min + "\t");
             min = heap.extractMin();
         }
