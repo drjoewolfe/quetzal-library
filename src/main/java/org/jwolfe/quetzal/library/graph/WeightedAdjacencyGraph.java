@@ -3,10 +3,7 @@ package org.jwolfe.quetzal.library.graph;
 import org.jwolfe.quetzal.library.general.IntPair;
 import org.jwolfe.quetzal.library.heap.MinHeap;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class WeightedAdjacencyGraph {
     public int getVertexCount() {
@@ -119,5 +116,72 @@ public class WeightedAdjacencyGraph {
         }
 
         return shortestDistances;
+    }
+
+    public List<IntPair> primMST() {
+
+        class VertexKey implements Comparable {
+            int vertex;
+
+            int key;
+
+            VertexKey(int vertex, int key) {
+                this.vertex = vertex;
+                this.key = key;
+            }
+
+            @Override
+            public int compareTo(Object o) {
+                VertexKey vk = (VertexKey) o;
+                return this.key - vk.key;
+            }
+        }
+
+        int[] parent = new int[vertexCount];
+        int[] keys = new int[vertexCount];
+        Map<Integer, Integer> vertexIndexesInHeap = new HashMap<>();
+        MinHeap<VertexKey> heap = new MinHeap<>(vertexCount, (vk, i) -> vertexIndexesInHeap.put(vk.vertex, i));
+
+        for (int i = 0; i < vertexCount; i++) {
+            int key = Integer.MAX_VALUE;
+            if (i == 0) {
+                // Mark start-vertex
+                key = 0;
+            }
+
+            var vk = new VertexKey(i, key);
+
+            parent[i] = -1;
+            keys[i] = key;
+            heap.insert(vk);
+        }
+
+        while (!heap.isEmpty()) {
+            var vk = heap.extractMin();
+            int u = vk.vertex;
+
+            for (var adjacentVertex : adjacencyList[u]) {
+                int v = adjacentVertex.getA();
+                int w = adjacentVertex.getB();
+
+                int heapIndex = vertexIndexesInHeap.get(v);
+
+                if (heapIndex >= 0 && keys[v] > w) {
+                    keys[v] = w;
+                    parent[v] = u;
+
+                    var vvk = heap.getAtIndex(heapIndex);
+                    vvk.key = w;
+                    heap.decreaseKey(heapIndex, vvk);
+                }
+            }
+        }
+
+        List<IntPair> mst = new ArrayList<>();
+        for (int i = 1; i < vertexCount; i++) {
+            mst.add(new IntPair(parent[i], i));
+        }
+
+        return mst;
     }
 }

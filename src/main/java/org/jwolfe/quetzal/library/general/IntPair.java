@@ -13,4 +13,12 @@ public class IntPair extends Pair<Integer, Integer> {
 		this.first = a;
 		this.second = b;
 	}
+
+	@Override
+	public String toString() {
+		return "IntPair{" +
+				"first=" + first +
+				", second=" + second +
+				'}';
+	}
 }
