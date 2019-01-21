@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.jwolfe.quetzal.library.general.Pair;
 import org.jwolfe.quetzal.library.utilities.Utilities;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 

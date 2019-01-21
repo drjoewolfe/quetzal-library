@@ -2,16 +2,24 @@ package org.jwolfe.quetzal.library.heap;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 public class MinHeap<T extends Comparable> {
     int capacity;
     int heapSize;
     List<T> elements;
 
+    BiConsumer<T, Integer> indexChangedCallback;
+
     public MinHeap(int capacity) {
         this.capacity = capacity;
         this.heapSize = 0;
         this.elements = new ArrayList<>(capacity);
+    }
+
+    public MinHeap(int capacity, BiConsumer<T, Integer> indexChangedCallback) {
+        this(capacity);
+        this.indexChangedCallback = indexChangedCallback;
     }
 
     public void insert(T[] keys) {
@@ -37,6 +45,8 @@ public class MinHeap<T extends Comparable> {
 
         int index = heapSize - 1;
         elements.add(key);
+        notifyIndexChanged(key, index);
+
         while (index > 0
                 && elements.get(index).compareTo(elements.get(parent(index))) < 0) {
             swap(index, parent(index));
@@ -65,8 +75,11 @@ public class MinHeap<T extends Comparable> {
         if (index == heapSize - 1) {
             elements.remove(heapSize - 1);
             heapSize--;
+
+            notifyIndexChanged(key, -1);
         } else {
             elements.set(index, elements.get(heapSize - 1));
+            notifyIndexChanged(elements.get(index), index);
 
             if (elements.get(index).compareTo(elements.get(parent(index))) < 0) {
                 // Fix up
@@ -107,9 +120,19 @@ public class MinHeap<T extends Comparable> {
         elements.set(0, elements.get(heapSize - 1));
         elements.remove(heapSize - 1);
         heapSize--;
+
+        notifyIndexChanged(min, -1);
+        if(heapSize != 0) {
+            notifyIndexChanged(elements.get(0), 0);
+        }
+
         minHeapify(0);
 
         return min;
+    }
+
+    public boolean isEmpty() {
+        return heapSize == 0;
     }
 
     private void minHeapify(int i) {
@@ -133,7 +156,19 @@ public class MinHeap<T extends Comparable> {
         }
     }
 
-    private void decreaseKey(int index, T key) {
+    public T getAtIndex(int index) {
+        if(index < 0 || index >= heapSize) {
+            return null;
+        }
+
+        return elements.get(index);
+    }
+
+    public void decreaseKey(int index, T key) {
+        if(key == null) {
+            return;
+        }
+
         elements.set(index, key);
 
         while (index > 0
@@ -159,5 +194,14 @@ public class MinHeap<T extends Comparable> {
         T temp = elements.get(i);
         elements.set(i, elements.get(j));
         elements.set(j, temp);
+
+        notifyIndexChanged(elements.get(i), i);
+        notifyIndexChanged(elements.get(j), j);
+    }
+
+    private void notifyIndexChanged(T item, int newIndex) {
+        if(indexChangedCallback != null) {
+            indexChangedCallback.accept(item, newIndex);
+        }
     }
 }
