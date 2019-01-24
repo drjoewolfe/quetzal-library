@@ -1,6 +1,19 @@
 package org.jwolfe.quetzal.library.general;
 
+import java.util.Objects;
+
 public class Activity {
+    public String getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(String activityId) {
+        this.activityId = activityId;
+    }
+
+    String activityId;
+
+
     public int getStart() {
         return start;
     }
@@ -23,6 +36,17 @@ public class Activity {
     int finish;
 
 
+    public int getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(int deadline) {
+        this.deadline = deadline;
+    }
+
+    int deadline;
+
+
     public int getProfit() {
         return profit;
     }
@@ -33,7 +57,26 @@ public class Activity {
 
     int profit;
 
+    public Activity() {
+
+    }
+
+    public Activity(String id) {
+        this();
+
+        this.activityId = id;
+    }
+
+    public Activity(String id, int deadline, int profit) {
+        this(id);
+
+        this.deadline = deadline;
+        this.profit = profit;
+    }
+
     public Activity(int start, int finish) {
+        this();
+
         this.start = start;
         this.finish = finish;
     }
@@ -41,5 +84,29 @@ public class Activity {
     public Activity(int start, int finish, int profit) {
         this(start, finish);
         this.profit = profit;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Activity activity = (Activity) o;
+        return Objects.equals(activityId, activity.activityId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(activityId);
+    }
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "activityId='" + activityId + '\'' +
+                ", start=" + start +
+                ", finish=" + finish +
+                ", deadline=" + deadline +
+                ", profit=" + profit +
+                '}';
     }
 }
