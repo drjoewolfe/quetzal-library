@@ -80,6 +80,10 @@ public class IntMinHeap {
         return min;
     }
 
+    public boolean isEmpty() {
+        return heapSize == 0;
+    }
+
     private void minHeapify(int i) {
         int l = left(i);
         int r = right(i);
