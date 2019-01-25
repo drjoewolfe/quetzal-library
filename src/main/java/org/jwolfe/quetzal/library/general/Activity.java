@@ -57,6 +57,29 @@ public class Activity {
 
     int profit;
 
+
+    public int getNumDaysForCompletion() {
+        return numDaysForCompletion;
+    }
+
+    public void setNumDaysForCompletion(int numDaysForCompletion) {
+        this.numDaysForCompletion = numDaysForCompletion;
+    }
+
+    int numDaysForCompletion;
+
+
+    public int getDailyLossDueToDelay() {
+        return dailyLossDueToDelay;
+    }
+
+    public void setDailyLossDueToDelay(int dailyLossDueToDelay) {
+        this.dailyLossDueToDelay = dailyLossDueToDelay;
+    }
+
+    int dailyLossDueToDelay;
+
+
     public Activity() {
 
     }
@@ -108,5 +131,13 @@ public class Activity {
                 ", deadline=" + deadline +
                 ", profit=" + profit +
                 '}';
+    }
+
+    public static Activity createActivityForNumDaysAndLoss(String activityId, int numDaysForCompletion, int dailyLossDueToDelay) {
+        Activity activity = new Activity(activityId);
+        activity.numDaysForCompletion = numDaysForCompletion;
+        activity.dailyLossDueToDelay = dailyLossDueToDelay;
+
+        return activity;
     }
 }
