@@ -7,20 +7,15 @@ public class IntDisjointSet {
 
     public IntDisjointSet(int size) {
         this.size = size;
-        parent = new int[size];
-    }
+        parent = new int[size + 1];
 
-    public boolean makeSet(int i) {
-        if (i >= size) {
-            return false;
+        for (int i = 0; i <= size; i++) {
+            parent[i] = i;
         }
-
-        parent[i] = i;
-        return true;
     }
 
     public int find(int i) {
-        if (i >= size) {
+        if (i > size) {
             return Integer.MIN_VALUE;
         }
 
@@ -33,7 +28,7 @@ public class IntDisjointSet {
     }
 
     public void union(int i, int j) {
-        if (i >= size || j >= size || i == j) {
+        if (i > size || j > size || i == j) {
             return;
         }
 

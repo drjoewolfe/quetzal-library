@@ -8,9 +8,6 @@ class IntDisjointSetTest {
     @Test
     void IntDisjointSetTest() {
         IntDisjointSet set = new IntDisjointSet(9);
-        for (int i = 0; i < 9; i++) {
-            set.makeSet(i);
-        }
 
         for (int i = 0; i < 9; i++) {
            assertEquals(i, set.find(i));
