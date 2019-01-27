@@ -439,4 +439,34 @@ public class AdjacencyGraph {
 
         currentPath.remove(index);
     }
+
+    public int countNumberOfPathsBetweenVertices(int source, int destination) {
+        if (source < 0 || source >= vertexCount || destination < 0 || destination >= vertexCount) {
+            return 0;
+        }
+
+        // Backtracking implementation
+        boolean[] visited = new boolean[vertexCount];
+        AtomicInteger pathCount = new AtomicInteger(0);
+        countNumberOfPathsBetweenVertices(source, destination, visited, pathCount);
+
+        return pathCount.intValue();
+    }
+
+    private void countNumberOfPathsBetweenVertices(int source, int destination, boolean[] visited, AtomicInteger pathCount) {
+        if (source == destination) {
+            // Reached destination. +1 to path
+            pathCount.getAndIncrement();
+            return;
+        }
+
+        visited[source] = true;
+        for (var vertex : adjacencyList[source]) {
+            if (!visited[vertex]) {
+                countNumberOfPathsBetweenVertices(vertex, destination, visited, pathCount);
+            }
+        }
+
+        visited[source] = false;
+    }
 }
