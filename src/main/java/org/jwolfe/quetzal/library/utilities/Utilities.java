@@ -37,7 +37,7 @@ public class Utilities {
 
 		return dummy.getNext();
 	}
-	
+
 	public static DoublyLinkedListNode createDoublyLinkedList(int... args) {
 		return createDoublyLinkedListFromArray(args);
 	}
@@ -53,7 +53,7 @@ public class Utilities {
 
 		return dummy.getNext();
 	}
-	
+
 	public static AuxiliaryLinkedListNode createAuxiliaryLinkedList(int... args) {
 		return createAuxiliaryLinkedListFromArray(args);
 	}
@@ -175,7 +175,7 @@ public class Utilities {
 	}
 
 	public static void printArray(boolean[] arr) {
-		for(boolean value : arr) {
+		for (boolean value : arr) {
 			System.out.print((value ? "T" : "F") + "\t");
 		}
 		System.out.println();
@@ -361,7 +361,7 @@ public class Utilities {
 
 		System.out.println();
 	}
-	
+
 	public static <T> void printListByLines(List<T> list) {
 		for (T i : list) {
 			System.out.println(i + " ");
@@ -369,7 +369,7 @@ public class Utilities {
 
 		System.out.println();
 	}
-	
+
 	public static <T> void printSet(Set<T> list) {
 		for (T i : list) {
 			System.out.print(i + " ");
@@ -377,7 +377,7 @@ public class Utilities {
 
 		System.out.println();
 	}
-	
+
 	public static <T> void printSetByLines(Set<T> list) {
 		for (T i : list) {
 			System.out.print(i + " ");
@@ -387,7 +387,7 @@ public class Utilities {
 	}
 
 	public static <T> void printSetListByLines(List<Set<T>> list) {
-		for(Set<T> set : list) {
+		for (Set<T> set : list) {
 			printSetByLines(set);
 		}
 
@@ -557,7 +557,7 @@ public class Utilities {
 		for (T item : args) {
 			list.add(item);
 		}
-		
+
 		return list;
 	}
 
@@ -565,55 +565,55 @@ public class Utilities {
 		int max = Integer.MIN_VALUE;
 		for (int[] subArray : arr) {
 			max = Math.max(max, getMaxValue(subArray));
-		}		
-		
+		}
+
 		return max;
 	}
-	
+
 	public static int getMaxValue(int[] arr) {
 		int max = Integer.MIN_VALUE;
 		for (int value : arr) {
 			max = Math.max(max, value);
-		}		
-		
+		}
+
 		return max;
 	}
 
 	public static void fillArray(int[][] arr, int x) {
-		for(var row : arr) {
+		for (var row : arr) {
 			Arrays.fill(row, x);
 		}
 	}
 
-    public static void fillArray(char[][] arr, char x) {
-		for(var row : arr) {
+	public static void fillArray(char[][] arr, char x) {
+		for (var row : arr) {
 			Arrays.fill(row, x);
 		}
-    }
-    
+	}
+
 	public static void fillArray(boolean[][] arr, boolean x) {
-		for(var row : arr) {
+		for (var row : arr) {
 			Arrays.fill(row, x);
 		}
 	}
 
-    public static <T> List<T> constructList(T... args) {
+	public static <T> List<T> constructList(T... args) {
 		List<T> list = new ArrayList<>();
-		for(T item : args) {
+		for (T item : args) {
 			list.add(item);
 		}
 
 		return list;
-    }
+	}
 
 	public static <T> Set<T> getSetDifference(Set<T> set1, Set<T> set2) {
-		if(set1 == null || set2 == null) {
-			return  null;
+		if (set1 == null || set2 == null) {
+			return null;
 		}
 
 		Set<T> difference = new HashSet<>();
-		for(var item : set1) {
-			if(!set2.contains(item)) {
+		for (var item : set1) {
+			if (!set2.contains(item)) {
 				difference.add(item);
 			}
 		}
@@ -622,13 +622,13 @@ public class Utilities {
 	}
 
 	public static Set<Integer> getSetDifference(int[] set1, Set<Integer> set2) {
-		if(set1 == null || set2 == null) {
-			return  null;
+		if (set1 == null || set2 == null) {
+			return null;
 		}
 
 		Set<Integer> difference = new HashSet<>();
-		for(var item : set1) {
-			if(!set2.contains(item)) {
+		for (var item : set1) {
+			if (!set2.contains(item)) {
 				difference.add(item);
 			}
 		}
@@ -640,5 +640,13 @@ public class Utilities {
 		ClassLoader loader = ClassLoader.getSystemClassLoader();
 		Scanner scanner = new Scanner(loader.getResourceAsStream(fileName), "UTF-8");
 		return scanner.useDelimiter("\\A").next();
+	}
+
+	public static boolean areEqual(int n1, int n2, int n3) {
+		if (n1 == n2 && n2 == n3) {
+			return true;
+		}
+
+		return false;
 	}
 }
