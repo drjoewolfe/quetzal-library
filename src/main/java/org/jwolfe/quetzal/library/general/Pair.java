@@ -45,5 +45,13 @@ public class Pair<T1, T2> {
     public int hashCode() {
         return Objects.hash(first, second);
     }
+
+    public T1 getKey() {
+        return getFirst();
+    }
+
+    public T2 getValue() {
+        return getSecond();
+    }
 }
 
